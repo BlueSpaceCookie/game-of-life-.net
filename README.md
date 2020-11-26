@@ -1,5 +1,5 @@
 # Game Of Life 
-Ce projet est un jeu de la vie developpé en C#
+Ce projet est un jeu de la vie developpé en C# WPF avec .NET Core
 
 # Presentation 
 Le jeu de la vie est un automate cellulaire imaginé par John Horton Conway en 1970. Il s'agit d'un jeu de simulation.
