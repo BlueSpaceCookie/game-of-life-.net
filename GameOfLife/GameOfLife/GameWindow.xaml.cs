@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GameOfLife
 {
@@ -17,24 +9,78 @@ namespace GameOfLife
     /// </summary>
     public partial class GameWindow : Window
     {
-        private Grid gameGrid;
+        private GameGrid GameGrid;
+        private Cell[,] CellArray;
         public GameWindow(int x, int y)
         {
-
-            gameGrid = new Grid(x, y);
-
-            for(int i = 0; i < x; i++)
-            {
-                grid.ColumnDefinitions.Add(new ColumnDefinition());
-                for(int j = 0; j < y; j++)
-                {
-                    Button b = new Button();
-                    b.Content = $"({i};{j})";
-                    grid.RowDefinitions.Add(new RowDefinition());
-                }
-            }
             InitializeComponent();
 
+            GameGrid = new GameGrid(x, y);
+            CellArray = new Cell[x, y];
+
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < y; j++)
+                {
+                    Cell c = new Cell(i, j);
+                    c.Click += CellClick;
+
+                    CellArray[i, j] = c;
+                }
+            }
+
+            CreateGameView(x, y);
+        }
+
+
+        private void CreateGameView(int x, int y)
+        {
+            grid.Width = grid.Height;
+
+            for (int i = 0; i < x; i++)
+            {
+                RowDefinition horizontal = new RowDefinition();
+                grid.RowDefinitions.Add(horizontal);
+
+                ColumnDefinition vertical = new ColumnDefinition();
+                grid.ColumnDefinitions.Add(vertical);
+            }
+
+            
+
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < y; j++)
+                {
+                    Cell c = CellArray[i, j];
+
+                    grid.Children.Add(c);
+                    Grid.SetRow(c, i);
+                    Grid.SetColumn(c, j);
+
+                }
+            }
+        }
+
+        private void CellClick(object sender, RoutedEventArgs e)
+        {
+            Cell c = (Cell)sender;
+            c.State = !c.State;
+
+            GameGrid.SetCellState(c.X, c.Y, c.State);
+        }
+
+        private void PlayClick(object sender, RoutedEventArgs e)
+        {
+            GameGrid.PlayRound();
+
+            for (int i = 0; i < GameGrid.SizeX; i++)
+            {
+                for (int j = 0; j < GameGrid.SizeY; j++)
+                {
+                    CellArray[i, j].State = GameGrid.GetCellState(i, j);
+                }
+            }
         }
     }
 }

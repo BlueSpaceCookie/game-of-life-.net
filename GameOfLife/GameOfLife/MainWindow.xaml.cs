@@ -27,8 +27,8 @@ namespace GameOfLife
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int x = 10;
-            int y = 10;
+            int x = 100;
+            int y = 100;
             GameWindow game = new GameWindow(x, y);
             game.Show();
         }
