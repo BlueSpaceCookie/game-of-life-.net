@@ -1,9 +1,10 @@
-﻿using System.Windows.Controls;
+﻿
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace GameOfLife
 {
-    class Cell : Button
+    class Cell
     {
         private bool _state;
 
@@ -15,7 +16,6 @@ namespace GameOfLife
             set
             {
                 _state = value;
-                Background = value ? Brushes.Black : Brushes.White;
             }
         }
 
@@ -25,7 +25,5 @@ namespace GameOfLife
             X = x;
             Y = y;
         }
-
-
     }
 }

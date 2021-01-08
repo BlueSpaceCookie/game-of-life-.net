@@ -5,14 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameOfLife"
         mc:Ignorable="d"
-        Title="GameWindow" Height="450" Width="800">
+        Title="Game Of Life" Height="450" Width="800">
     <Grid>
-        <Grid x:Name="grid" Margin="10,10,10,49"/>
-        <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="680,390,0,0" VerticalAlignment="Top" Click="PlayClick"/>
+        <!--<Canvas x:Name="grid" Margin="10,60,10,10"></Canvas>-->
+        <Image x:Name="grid" Margin="10,60,10,10"></Image>
+        <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="423,23,0,0" VerticalAlignment="Top" Click="PlayClick" RenderTransformOrigin="0.509,0.524"/>
+        <Button x:Name="pauseButton" Content="Pause" HorizontalAlignment="Left" Margin="340,23,0,0" VerticalAlignment="Top" Click="PauseClick"/>
+        <Button x:Name="resetButton" Content="Reset" HorizontalAlignment="Left" Margin="486,23,0,0" VerticalAlignment="Top" Click="ResetClick"/>
     </Grid>
-
-
-
-
-
 </Window>

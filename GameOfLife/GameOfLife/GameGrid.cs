@@ -64,7 +64,7 @@ namespace GameOfLife
                         continue;
                     }
 
-                    if (Grid[searchX, searchY] == true) // Cell is alie
+                    if (Grid[searchX, searchY] == true) // Cell is alive
                     {
                         ++count;
                     }
