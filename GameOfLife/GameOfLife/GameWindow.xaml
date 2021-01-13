@@ -8,7 +8,7 @@
         Title="Game Of Life" Height="450" Width="800">
     <Grid>
         <!--<Canvas x:Name="grid" Margin="10,60,10,10"></Canvas>-->
-        <Image x:Name="grid" Margin="10,60,10,10"></Image>
+        <Grid x:Name="grid" Margin="10,60,10,10"></Grid>
         <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="423,23,0,0" VerticalAlignment="Top" Click="PlayClick" RenderTransformOrigin="0.509,0.524"/>
         <Button x:Name="pauseButton" Content="Pause" HorizontalAlignment="Left" Margin="340,23,0,0" VerticalAlignment="Top" Click="PauseClick"/>
         <Button x:Name="resetButton" Content="Reset" HorizontalAlignment="Left" Margin="486,23,0,0" VerticalAlignment="Top" Click="ResetClick"/>

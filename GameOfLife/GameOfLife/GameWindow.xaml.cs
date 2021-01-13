@@ -15,6 +15,7 @@ namespace GameOfLife
     public partial class GameWindow : Window
     {
         private GameGrid GameGrid;
+        private Cell[,] CellArray;
         private bool Playing;
         
 
@@ -30,59 +31,76 @@ namespace GameOfLife
             Timer.Tick += TimerTick;
 
             GameGrid = new GameGrid(x, y);
-            CellArray = new GeometryDrawing[x, y];
+            CellArray = new Cell[x, y];
             Playing = false;
 
-            
-
-            UpdateImage();
-
-            grid.MouseDown += CellClick;
-        }
-
-        private void UpdateImage()
-        {
-            DrawingGroup imageDrawings = new DrawingGroup();
-            
-
-            for (int i = 0; i < GameGrid.SizeX; i++)
+            for (int i = 0; i < x; i++)
             {
-                for (int j = 0; j < GameGrid.SizeY; j++)
+                for (int j = 0; j < y; j++)
                 {
-                    bool state = GameGrid.GetCellState(i, j);
-                    GeometryDrawing rect = new GeometryDrawing(state ? Brushes.Black : Brushes.White, new Pen(Brushes.Black, 1), new RectangleGeometry(new Rect(10 * i, 10 * j, 10, 10)));
-                    CellArray[i, j] = rect;
-                    imageDrawings.Children.Add(rect);
+                    Cell c = new Cell(i, j);
+                    c.Click += CellClick;
+
+                    CellArray[i, j] = c;
                 }
             }
 
-            DrawingImage image = new DrawingImage(imageDrawings);
-            grid.Source = image;
-            image.Freeze();
+            CreateGameView(x, y);
         }
+
+        private void CreateGameView(int x, int y)
+        {
+            grid.Width = grid.Height;
+
+            for (int i = 0; i < x; i++)
+            {
+                RowDefinition horizontal = new RowDefinition();
+                grid.RowDefinitions.Add(horizontal);
+
+                ColumnDefinition vertical = new ColumnDefinition();
+                grid.ColumnDefinitions.Add(vertical);
+            }
+
+
+
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < y; j++)
+                {
+                    Cell c = CellArray[i, j];
+
+                    grid.Children.Add(c);
+                    Grid.SetRow(c, i);
+                    Grid.SetColumn(c, j);
+
+                }
+            }
+        }
+
+
 
         private void PlayOneRound()
         {
             GameGrid.PlayRound();
 
-            UpdateImage();
+            for (int i = 0; i < GameGrid.SizeX; i++)
+            {
+                for (int j = 0; j < GameGrid.SizeY; j++)
+                {
+                    CellArray[i, j].State = GameGrid.GetCellState(i, j);
+                }
+            }
         }
 
 
-        private void CellClick(object sender, MouseEventArgs e)
+        private void CellClick(object sender, RoutedEventArgs e)
         {
             if (!Playing)
             {
-                Point pos = e.GetPosition(grid);
+                Cell c = (Cell)sender;
+                c.State = !c.State;
 
-                double width = grid.ActualWidth;
-                double height = grid.ActualHeight;
-
-                int i = (int)(pos.X / width * GameGrid.SizeX);
-                int j = (int)(pos.Y / height * GameGrid.SizeY);
-                bool newState = !GameGrid.GetCellState(i, j);
-                GameGrid.SetCellState(i, j, newState);
-                UpdateImage();
+                GameGrid.SetCellState(c.X, c.Y, c.State);
             }
         }
 
