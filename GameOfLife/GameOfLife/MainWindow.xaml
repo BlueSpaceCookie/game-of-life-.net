@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameOfLife"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="GameOfLife" Height="200" Width="200"
+        ResizeMode="NoResize">
     <Grid>
-        <TextBox HorizontalAlignment="Center" Margin="0,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <TextBox HorizontalAlignment="Center" Margin="0,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Taille x" HorizontalAlignment="Left" Margin="282,155,0,0" VerticalAlignment="Top"/>
-        <Label Content="Taille y" HorizontalAlignment="Left" Margin="282,195,0,0" VerticalAlignment="Top"/>
-        <Button Content="Start" HorizontalAlignment="Left" Margin="475,241,0,0" VerticalAlignment="Top" Width="61" Click="Button_Click"/>
+        <Label Content="Taille de la grille" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Top" Height="28"/>
+        <RadioButton x:Name="aSize"  Content="10x10" Margin="68,34,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50"/>
+        <RadioButton x:Name="bSize" Content="50x50" Margin="68,54,0,0" VerticalAlignment="Top" IsChecked="True" HorizontalAlignment="Left" Width="50"/>
+        <RadioButton x:Name="cSize" Content="100x100" HorizontalAlignment="Center" Margin="0,74,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="dSize" Content="150x150" HorizontalAlignment="Center" Margin="0,94,0,0" VerticalAlignment="Top"/>
+        <Button Content="Play" HorizontalAlignment="Center" Margin="0,123,0,0" VerticalAlignment="Top" Width="114" Click="Play_Click" Height="26"/>
     </Grid>
 </Window>

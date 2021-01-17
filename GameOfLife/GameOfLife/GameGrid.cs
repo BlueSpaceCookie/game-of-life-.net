@@ -73,9 +73,16 @@ namespace GameOfLife
             return count;
         }
 
-        public void SetCellState(int x, int y, bool state)
+        public void SetCellState(int[][] cells, bool state)
         {
-            Grid[x, y] = state;
+            foreach (int[] cell in cells)
+            {
+                if (cell[0] >= 0 && cell[0] < this.SizeX && cell[1] >= 0 && cell[1] < this.SizeY)
+                {
+                    Grid[cell[0], cell[1]] = state;
+                }
+                
+            }
         }
 
         public bool GetCellState(int x, int y)
