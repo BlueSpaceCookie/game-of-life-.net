@@ -95,7 +95,7 @@ namespace GameOfLife
             {
                 Cell c = (Cell)sender;
 
-                int[][] cells = getCellSelectionType(c.X, c.Y);
+                int[][] cells = getImpactedCells(c.X, c.Y);
 
                 c.State = !c.State;
 
@@ -172,7 +172,7 @@ namespace GameOfLife
             LastSelectedMenuItem = m;
         }
 
-        private int[][] getCellSelectionType(int x, int y)
+        private int[][] getImpactedCells(int x, int y)
         {
             if(LastSelectedMenuItem != null && LastSelectedMenuItem.IsChecked) 
             { 
@@ -180,11 +180,20 @@ namespace GameOfLife
 
                 switch (selectionType)
                 {
+                    case "linePattern":
+                        return Patterns.Line(x, y);
+
+                    case "crossPattern":
+                        return Patterns.Cross(x, y);
+
                     case "gliderPattern":
-                        return Patterns.glider(x, y);
+                        return Patterns.Glider(x, y);
+
+                    case "starPattern":
+                        return Patterns.Star(x, y);
                 }
             }
-            return Patterns.cell(x, y);
+            return Patterns.Cell(x, y);
 
         }
     }

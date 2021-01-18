@@ -10,8 +10,10 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Pattern">
+                <MenuItem x:Name="linePattern" Header="_Line" IsCheckable="True" IsChecked="False" Click="MenuItem_Click"/>
                 <MenuItem x:Name="gliderPattern" Header="_Glider" IsCheckable="True" IsChecked="False" Click="MenuItem_Click"/>
-                <MenuItem x:Name="gliderGunPattern" Header="_Glider gun" IsCheckable="True" IsChecked="False" Click="MenuItem_Click"/>
+                <MenuItem x:Name="crossPattern" Header="_Cross" IsCheckable="True" IsChecked="False" Click="MenuItem_Click"/>
+                <MenuItem x:Name="starPattern" Header="_Star" IsCheckable="True" IsChecked="False" Click="MenuItem_Click"/>
             </MenuItem>
         </Menu>
         <Grid>
